@@ -1,43 +1,53 @@
 <script>
-  let interests = ["learn new skills", "create content online", "explore the internet", "expand my knowledge"];
-  let show_interest = interests[0] + ".";
-  let interest_index = 0;
-  let interest_text;  
-  let visible = true;
+  let interests = [
+    "learn new skills",
+    "create content online",
+    "explore the internet",
+    "expand my knowledge",
+  ];
 
-  import { fade, fly } from 'svelte/transition';
+  let tmp_interests = [];
+  let interest_index = -1;
 
-  setInterval(function() {
-    visible = false;
-    show_interest = interests[interest_index++ % interests.length] + ".";
-    setTimeout(function() {
-      visible = true;
-    }, 2500)
-  }, 2500)
+  import { flip } from "svelte/animate";
+  import { fly } from "svelte/transition";
 
+  Iterate();
+  setInterval(Iterate, 2500);
+
+  function Iterate() {
+    interest_index++;
+    if (interest_index >= interests.length) interest_index = 0;
+    tmp_interests = [interests[interest_index]];
+  }
 </script>
+
+<div style="display:flex; justify-content: center; gap:1ch">
+  <p>I like to</p>
+
+  <div style="display:relative">
+    {#each tmp_interests as interest (interest)}
+      <p
+        class="interests"
+        in:fly={{ y: 10, duration: 1500 }}
+        out:fly={{ y: -10, duration: 750 }}
+        animate:flip
+      >
+        {interest}.
+      </p>
+    {/each}
+  </div>
+</div>
 
 <style>
   .interests {
-    display: inline-block;
+    /* display: inline; */
     font-family: Arial, Helvetica, sans-serif;
     color: var(--arylide-yellow);
+    left: 0 !important;
   }
 
-  html { 
+  :global(html) {
     scroll-behavior: smooth;
   }
-
-  #interests-fallback {
-    opacity: 0;
-  }
 </style>
-
-{#if visible}
-  <a>I like to <div class="interests" in:fly="{{ y: 10, duration: 1000 }}" out:fade>{show_interest}</div></a>
-{/if}
-
-{#if !visible}
-  <!-- Background text (fallback) --->
-  <a>I like to <div id="interests-fallback" class="interests">{show_interest}</div></a>
-{/if}
