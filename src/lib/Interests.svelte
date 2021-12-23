@@ -34,7 +34,7 @@
 </style>
 
 {#if visible}
-  <a>I like to <div class="interests" in:fly="{{ y: 10, duration: 1000 }}" out:fade>{show_interest}</div></a>
+  <a>I like to <div class="interests" in:fly="{{ y: 10, duration: 1000 }}">{show_interest}</div></a>
 {/if}
 
 {#if !visible}
