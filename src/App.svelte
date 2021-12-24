@@ -15,6 +15,7 @@
     --peach-crayola: #f4c095ff;
     --red-pigment: #ee2e31ff;
     --cultured: #f2f2f2ff;
+    --arylide-yellow: #e5d352ff;
   }
 
   main {
