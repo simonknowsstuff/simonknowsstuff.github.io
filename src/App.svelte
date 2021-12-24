@@ -16,6 +16,7 @@
     --red-pigment: #ee2e31ff;
     --cultured: #f2f2f2ff;
     --arylide-yellow: #e5d352ff;
+    --teal-blue: #537d8dff;
   }
 
   main {
@@ -71,11 +72,6 @@
     padding: 20px;
     color: var(--peach-crayola);
     text-align: left;
-  }
-
-  #footer a {
-    color: inherit;
-    text-decoration: none;
   }
 </style>
 
