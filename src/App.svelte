@@ -9,16 +9,6 @@
 <style>
   :root {
     /* CSS HEX */
-    --dark-byzantium: #482c3dff;
-    --sweet-brown: #ac3931ff;
-    --arylide-yellow: #e5d352ff;
-    --maximum-green-yellow: #d9e76cff;
-    --olivine: #96b27dff;
-    --morning-blue: #759885ff;
-    --steel-teal: #648b89ff;
-    --teal-blue: #537d8dff;
-
-    /* CSS HEX */
     --dark-jungle-green: #071e22ff;
     --myrtle-green: #1d7874ff;
     --wintergreen-dream: #679289ff;
