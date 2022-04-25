@@ -115,7 +115,7 @@
       <h3>Partify</h3>
       <p>A webapp that lets you listen to other spotify users using discord and without spotify for free!
       </p>
-      <input type="button" onclick="javascript:window.open('https://github.com/Technohacker/GodotMusicVis', '_blank');" class="github_btn" value="Github" />
+      <input type="button" onclick="javascript:window.open('https://github.com/simonknowsstuff/partify', '_blank');" class="github_btn" value="Github" />
     </div>
   </div>
   <p>You can also find my other github projects here.</p>
