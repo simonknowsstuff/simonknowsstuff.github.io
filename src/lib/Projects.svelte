@@ -112,8 +112,8 @@
       <input type="button" onclick="javascript:window.open('https://github.com/Technohacker/GodotMusicVis', '_blank');" class="github_btn" value="Github" />
     </div>
     <div class="card">
-      <h3>Simple Twitter CLI</h3>
-      <p>A project that makes use of the Twitter API which I made as a beginner. Collaboration with <a href="https://github.com/clima-dev/" target="_blank">Clima.</a>
+      <h3>Partify</h3>
+      <p>A webapp that lets you listen to other spotify users using discord and without spotify for free!
       </p>
       <input type="button" onclick="javascript:window.open('https://github.com/Technohacker/GodotMusicVis', '_blank');" class="github_btn" value="Github" />
     </div>
