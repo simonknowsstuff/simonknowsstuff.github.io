@@ -36,6 +36,6 @@ declare module "$app/types" {
 		};
 		Pathname(): "/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
-		Asset(): "/favicon.svg" | "/images/banner.jpeg" | "/images/banners/gfm-banner.jpeg" | "/images/banners/medisukham-banner.jpeg" | "/images/banners/partify-banner.jpeg" | "/images/expertise.webp" | "/images/icons/email.svg" | "/images/icons/link.svg" | "/images/icons/location.svg" | "/images/profile.jpeg";
+		Asset(): "/favicon.svg" | "/images/banner.jpeg" | "/images/banners/gfm-banner.jpeg" | "/images/banners/medisukham-banner.jpeg" | "/images/banners/partify-banner.jpeg" | "/images/expertise.webp" | "/images/icons/email.svg" | "/images/icons/link.svg" | "/images/icons/location.svg" | "/images/profile.jpeg" | string & {};
 	}
 }
