@@ -56,6 +56,11 @@
             link: "https://github.com/simonknowsstuff/medisukham"
         }
     ];
+
+    // Add click handler to open the user's email client
+    function handleGetInTouch() {
+        window.location.href = 'mailto:simonknowsstuff@gmail.com';
+    }
 </script>
 
 <svelte:head>
@@ -129,8 +134,8 @@
 
             <!-- Action Buttons -->
             <div class="action-buttons">
-                <button class="btn primary">Download Resume</button>
-                <button class="btn secondary">Get In Touch</button>
+<!--                <button class="btn primary">Download Resume</button> I do not have a resume yet -->
+                <button class="btn primary" on:click={handleGetInTouch}>Get In Touch</button>
             </div>
         </div>
     </div>
