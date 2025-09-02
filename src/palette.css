@@ -1,0 +1,21 @@
+.pixel-art {
+	position: relative;
+	top: 0;
+	left: 0;
+	height: 1px;
+	width: 1px;
+	box-shadow:
+
+0px 0px #000000,
+1px 0px #1B1D1E,
+2px 0px #272820,
+3px 0px #3E3D32,
+4px 0px #75715E,
+5px 0px #F8F8F2,
+6px 0px #F92672,
+7px 0px #FD971F,
+8px 0px #E6DB74,
+9px 0px #66D9EF,
+10px 0px #A6E22E,
+11px 0px #AE81FF;
+}
