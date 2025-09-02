@@ -29,7 +29,11 @@ jobs:
       - name: Build SvelteKit
         run: npm run build
 
-      # 5. Deploy to build branch
+      # 5. Add CNAME for custom domain
+      - name: Add CNAME file
+        run: echo "simonknowsstuff.is-a.dev" > build/CNAME
+
+      # 6. Deploy to build branch
       - name: Deploy to build branch
         uses: peaceiris/actions-gh-pages@v3
         with:
