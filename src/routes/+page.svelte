@@ -395,7 +395,25 @@
 
     @media (max-width: 768px) {
         main {
-            padding: 1rem;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100vw;
+            max-width: 100vw;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            min-height: 100vh;
+        }
+
+        .profile-card {
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        :global(.carousel-container) {
+            border-radius: 0;
         }
 
         .profile-content {
@@ -441,8 +459,7 @@
         .projects-section {
             padding: 0 1.5rem;
         }
-
-        /* Match the smaller padding used on profile-section at this breakpoint */
+        
         .expertise-display {
             margin-left: -1.5rem;
             margin-right: -1.5rem;
