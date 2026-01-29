@@ -1,6 +1,7 @@
 <script lang="ts">
     import ProjectCarousel from '../lib/ProjectCarousel.svelte';
     import ExpertiseDisplay from '../lib/ExpertiseDisplay.svelte';
+    import ProfilePicture from '../lib/ProfilePicture.svelte';
     import {onMount} from 'svelte';
     import {fly} from "svelte/transition";
 
@@ -17,6 +18,7 @@
     let currentRoleIndex = 0;
     let currentRole = roles[0];
 
+    // Keep switching roles every few seconds. Display the special role rarely.
     onMount(() => {
         const interval = setInterval(() => {
             if (Math.random() < 0.10 && specialRoleIndex !== -1) {
@@ -30,9 +32,26 @@
 
         return () => clearInterval(interval);
     });
+
     const projects = [
         {
             id: 1,
+            title: "Sakshya",
+            description: "A tool to extract timelines from a video for a given prompt, for both forensic and general-purpose situations using Gemini. GDGC Techsprint Hackathon 2026 winner. Currently work in progress.",
+            image: "/images/banners/sakshya-banner.jpeg",
+            tech: ["React.js", "Gemini", "Firebase"],
+            link: "https://sakshyavisual.web.app/"
+        },
+        {
+            id: 2,
+            title: "Medisukham",
+            description: "An app that sets alarms automatically from scanned prescriptions using Gemini. Currently work in progress.",
+            image: "/images/banners/medisukham-banner.jpeg",
+            tech: ["Flutter", "Gemini"],
+            link: "https://github.com/simonknowsstuff/medisukham"
+        },
+        {
+            id: 3,
             title: "Partify",
             description: "Partify is a webapp that lets you listen to music with friends in discord. It is built using discord.js and Node.js, and it is designed to be easy to use in your discord servers.",
             image: "/images/banners/partify-banner.jpeg",
@@ -40,32 +59,29 @@
             link: "https://github.com/simonknowsstuff/partify"
         },
         {
-            id: 2,
+            id: 4,
             title: "Godot Film Maker",
             description: "Godot Film Maker (GFM for short) is a plugin for Godot 3 that lets you record videos using ffmpeg from your Godot project. It can easily be configured from its script files and provides options for customisation. It is still in the prototype stage and more features are to be added.",
             image: "/images/banners/gfm-banner.jpeg",
             tech: ["Godot", "GDScript", "FFMpeg"],
             link: "https://github.com/simonknowsstuff/Godot-Film-Maker"
         },
-        {
-            id: 3,
-            title: "Medisukham",
-            description: "An app that sets alarms automatically from scanned prescriptions using an OCR + LLM pipeline. Currently work in progress.",
-            image: "/images/banners/medisukham-banner.jpeg",
-            tech: ["FastAPI", "Python", "PaddleOCR", "Ollama"],
-            link: "https://github.com/simonknowsstuff/medisukham"
-        }
     ];
 
-    // Add click handler to open the user's email client
+    // Click handler to open the user's email client
     function handleGetInTouch() {
-        window.location.href = 'mailto:simonknowsstuff@gmail.com';
+        window.open('mailto:simonknowsstuff@gmail.com', "_blank");
+    }
+
+    // Click handler to open resume PDF:
+    function handleResume() {
+        window.open("/resume.pdf", "_blank");
     }
 </script>
 
 <svelte:head>
     <title>Simon Binu - Portfolio</title>
-    <meta content="Creative Developer & UI/UX Designer portfolio showcasing modern web applications and digital experiences."
+    <meta content="Developer portfolio showcasing modern web applications and digital experiences."
           name="description"/>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </svelte:head>
@@ -81,9 +97,9 @@
             <!-- Profile Section -->
             <div class="profile-section">
                 <div class="profile-content">
+                    <!-- Fancy Profile Image -->
                     <div class="profile-image">
-                        <img alt="Profile"
-                             src="/images/profile.jpeg"/>
+                        <ProfilePicture />
                     </div>
 
                     <div class="profile-info">
@@ -99,10 +115,10 @@
                             {/key}
                         </div>
                         <p class="description">
-                           Hi, I'm Simon and I'm a full-stack developer, game developer, pixel artist and a huge hardware enthusiast.
+                           Hi, I'm Simon and I'm a full-stack developer, game developer, pixel artist and a huge PC hardware enthusiast.
                             I love designing projects with a focus on user experience and functionality. I'm always looking for new challenges
                             and opportunities to learn and grow. I'm passionate about creating innovative solutions and making a positive impact.
-                            In my free time, you'll catch me playing games, exploring new technologies and taking long walks.
+                            In my free time, you'll catch me playing games, exploring new technologies or taking long walks.
                         </p>
                     </div>
                 </div>
@@ -134,8 +150,8 @@
 
             <!-- Action Buttons -->
             <div class="action-buttons">
-<!--                <button class="btn primary">Download Resume</button> I do not have a resume yet -->
-                <button class="btn primary" on:click={handleGetInTouch}>Get In Touch</button>
+                <button class="btn primary" on:click={handleResume}>Download Resume</button>
+                <button class="btn secondary" on:click={handleGetInTouch}>Get In Touch</button>
             </div>
         </div>
     </div>
@@ -156,7 +172,6 @@
 </footer>
 
 <style>
-
     :root {
         --black: #000000ff;
         --eerie-black: #1b1d1eff;
@@ -216,14 +231,6 @@
         height: 120px;
         flex-shrink: 0;
         position: relative;
-    }
-
-    .profile-image img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10%;
-        object-fit: cover;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
 
     .profile-info {
@@ -337,27 +344,29 @@
 
     .btn.primary {
         background: var(--dim-gray);
+        border: 2px solid var(--dim-gray);
         color: var(--baby-powder);
         box-shadow: 0 4px 15px var(--black-olive);
     }
 
     .btn.primary:hover {
+        background: transparent;
         transform: translateY(-2px);
         box-shadow: 0 8px 25px var(--eerie-black);
     }
 
     .btn.secondary {
-        background: transparent;
-        color: var(--dim-gray);
-        border: 2px solid var(--dim-gray);
-        box-shadow: 0 4px 15px var(--black-olive);
+       background: transparent;
+       color: var(--baby-powder);
+       border: 2px solid var(--dim-gray);
+       box-shadow: 0 4px 15px var(--black-olive);
     }
 
     .btn.secondary:hover {
-        background: var(--dim-gray);
-        color: var(--baby-powder);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px var(--eerie-black);
+       background: var(--dim-gray);
+       color: var(--baby-powder);
+       transform: translateY(-2px);
+       box-shadow: 0 8px 25px var(--eerie-black);
     }
 
     .site-footer {
@@ -459,7 +468,7 @@
         .projects-section {
             padding: 0 1.5rem;
         }
-        
+
         .expertise-display {
             margin-left: -1.5rem;
             margin-right: -1.5rem;
