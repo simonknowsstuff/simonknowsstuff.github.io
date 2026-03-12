@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount, onDestroy } from 'svelte';
+
     interface Project {
         id: number;
         title: string;
@@ -12,6 +14,9 @@
 
     let currentIndex = 0;
     let carouselContainer: HTMLDivElement;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let autoRotateInterval: number;
 
     function nextProject() {
         currentIndex = (currentIndex + 1) % projects.length;
@@ -26,6 +31,7 @@
     function goToProject(index: number) {
         currentIndex = index;
         updateCarousel();
+        resetAutoRotate();
     }
 
     function updateCarousel() {
@@ -34,30 +40,67 @@
             carouselContainer.style.transform = `translateX(${translateX}%)`;
         }
     }
+
+    function handleTouchStart(e: TouchEvent) {
+        touchStartX = e.touches[0].clientX;
+    }
+
+    function handleTouchMove(e: TouchEvent) {
+        touchEndX = e.touches[0].clientX;
+    }
+
+    function handleTouchEnd() {
+        if (!touchStartX || !touchEndX) return;
+        
+        const swipeThreshold = 50;
+        const difference = touchStartX - touchEndX;
+        
+        if (Math.abs(difference) > swipeThreshold) {
+            if (difference > 0) {
+                nextProject();
+            } else {
+                prevProject();
+            }
+            resetAutoRotate();
+        }
+        
+        touchStartX = 0;
+        touchEndX = 0;
+    }
+
+    function resetAutoRotate() {
+        if (autoRotateInterval) {
+            clearInterval(autoRotateInterval);
+        }
+        autoRotateInterval = window.setInterval(() => {
+            nextProject();
+        }, 10000);
+    }
+
+    onMount(() => {
+        resetAutoRotate();
+    });
+
+    onDestroy(() => {
+        if (autoRotateInterval) {
+            clearInterval(autoRotateInterval);
+        }
+    });
 </script>
 
 <div class="carousel-wrapper">
     <div class="carousel-header">
         <h3>Featured Projects</h3>
-        <div class="carousel-nav">
-            <button
-                    aria-label="Previous project"
-                    class="nav-btn"
-                    on:click={prevProject}
-            >
-                ‹
-            </button>
-            <button
-                    aria-label="Next project"
-                    class="nav-btn"
-                    on:click={nextProject}
-            >
-                ›
-            </button>
-        </div>
     </div>
 
-    <div class="carousel-container">
+    <div 
+        class="carousel-container"
+        role="region"
+        aria-label="Project carousel"
+        on:touchstart={handleTouchStart}
+        on:touchmove={handleTouchMove}
+        on:touchend={handleTouchEnd}
+    >
         <div bind:this={carouselContainer} class="carousel-track">
             {#each projects as project, index}
                 <div class="project-card">
@@ -112,36 +155,12 @@
         font-weight: 600;
     }
 
-    .carousel-nav {
-        display: flex;
-        gap: 0.75rem;
-    }
-
-    .nav-btn {
-        width: 48px;
-        height: 48px;
-        border: none;
-        border-radius: 50%;
-        background: var(--baby-powder);
-        color: var(--dim-gray);
-        font-size: 1.25rem;
-        line-height: 1; /* centers the arrow glyph vertically */
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
-
-    .nav-btn:hover {
-        background: var(--baby-powder);
-        transform: scale(1.05);
-    }
-
     .carousel-container {
         overflow: hidden;
         border-radius: 12px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        touch-action: pan-y;
+        user-select: none;
     }
 
     .carousel-track {
@@ -258,12 +277,6 @@
     }
 
     @media (max-width: 768px) {
-        .carousel-header {
-            flex-direction: column;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
         .project-image {
             height: 160px;
         }

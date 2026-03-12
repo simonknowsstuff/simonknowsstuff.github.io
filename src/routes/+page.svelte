@@ -2,6 +2,7 @@
     import ProjectCarousel from '../lib/ProjectCarousel.svelte';
     import ExpertiseDisplay from '../lib/ExpertiseDisplay.svelte';
     import ProfilePicture from '../lib/ProfilePicture.svelte';
+    import FloatingShapes from '../lib/FloatingShapes.svelte';
     import {onMount} from 'svelte';
     import {fly} from "svelte/transition";
 
@@ -36,6 +37,14 @@
     const projects = [
         {
             id: 1,
+            title: "Ravana",
+            description: "Ravana is a zero-install, browser-based compute farm. It utilizes a master-worker architecture to parse GLTF-exported Blender scenes, distribute intensive tile-based rendering tasks to mobile devices via web sockets, and stitch the results into a final high-resolution output. CUSAT's Make-A-Ton 8.0 winner.",
+            image: "/images/banners/ravana-banner.jpeg",
+            tech: ["React.js", "socket.io", "three.js"],
+            link: "https://ravana.onrender.com/"    
+        },
+        {
+            id: 2,
             title: "Sakshya",
             description: "A tool to extract timelines from a video for a given prompt, for both forensic and general-purpose situations using Gemini. GDGC Techsprint Hackathon 2026 winner. Currently work in progress.",
             image: "/images/banners/sakshya-banner.jpeg",
@@ -43,7 +52,7 @@
             link: "https://sakshyavisual.web.app/"
         },
         {
-            id: 2,
+            id: 3,
             title: "Medisukham",
             description: "An app that sets alarms automatically from scanned prescriptions using Gemini. Currently work in progress.",
             image: "/images/banners/medisukham-banner.jpeg",
@@ -51,7 +60,7 @@
             link: "https://github.com/simonknowsstuff/medisukham"
         },
         {
-            id: 3,
+            id: 4,
             title: "Partify",
             description: "Partify is a webapp that lets you listen to music with friends in discord. It is built using discord.js and Node.js, and it is designed to be easy to use in your discord servers.",
             image: "/images/banners/partify-banner.jpeg",
@@ -59,7 +68,7 @@
             link: "https://github.com/simonknowsstuff/partify"
         },
         {
-            id: 4,
+            id: 5,
             title: "Godot Film Maker",
             description: "Godot Film Maker (GFM for short) is a plugin for Godot 3 that lets you record videos using ffmpeg from your Godot project. It can easily be configured from its script files and provides options for customisation. It is still in the prototype stage and more features are to be added.",
             image: "/images/banners/gfm-banner.jpeg",
@@ -87,6 +96,8 @@
 </svelte:head>
 
 <main>
+    <FloatingShapes />
+
     <div class="container">
         <div class="profile-card">
             <!-- Banner Section -->
@@ -192,11 +203,15 @@
         align-items: center;
         justify-content: center;
         font-family: 'Pixelify Sans', system-ui, sans-serif;
+        position: relative;
+        overflow: hidden;
     }
 
     .container {
         width: 100%;
         max-width: 800px;
+        position: relative;
+        z-index: 1;
     }
 
     .profile-card {

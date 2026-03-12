@@ -2,8 +2,16 @@
     let isFlipped = false;
     let isHovered = false;
     let isLockedByClick = false;
+
+    function updateFlipState() {
+        isFlipped = isLockedByClick || isHovered;
+    }
     
-    function handleHover(hovered: boolean) {
+    function handleHover(hovered: boolean, event: PointerEvent) {
+        if (event.pointerType !== 'mouse') {
+            return;
+        }
+
         isHovered = hovered;
         if (!isLockedByClick) {
             isFlipped = hovered;
@@ -12,14 +20,14 @@
     
     function handleClick() {
         isLockedByClick = !isLockedByClick;
-        isFlipped = isLockedByClick || isHovered;
+        updateFlipState();
     }
 </script>
 
 <div 
     class="profile-picture-container"
-    on:mouseenter={() => handleHover(true)}
-    on:mouseleave={() => handleHover(false)}
+    on:pointerenter={(event) => handleHover(true, event)}
+    on:pointerleave={(event) => handleHover(false, event)}
     on:click={handleClick}
     on:keypress={(e) => e.key === 'Enter' && handleClick()}
     role="button"
@@ -43,6 +51,7 @@
         cursor: pointer;
         width: 100%;
         height: 100%;
+        touch-action: manipulation;
     }
     
     .flip-card {
